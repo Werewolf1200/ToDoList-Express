@@ -26,7 +26,7 @@ app.get("/", taskController.getAllTasks);
 app.get("/add", taskController.getAddTaskForm);
 app.post("/add", taskController.addTask);
 app.get("/edit/:id", taskController.getEditTaskForm);
-app.get("/edit/:id", taskController.editTask);
+app.post("/edit/:id", taskController.editTask);
 app.get("/complete/:id", taskController.completeTask);
 app.get("/uncomplete/:id", taskController.uncompleteTask);
 app.get("/delete/:id", taskController.deleteTask);

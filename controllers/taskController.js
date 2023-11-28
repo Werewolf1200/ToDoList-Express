@@ -7,13 +7,39 @@ const getAllTasks = (req, res) => {
     res.render("index", { title: "Lista de Tareas", tasks });
  };
 
-const getAddTaskForm = (req, res) => { };
+const getAddTaskForm = (req, res) => { 
+    res.render("add", { title: "Agregar tarea" });
+};
 
-const addTask = (req, res) => { };
+const addTask = (req, res) => { 
+    let { title } = req.body;
+    let id = tasks.length + 1;
+    tasks.push({ id, title, completed: false });
+    res.redirect("/");
+};
 
-const getEditTaskForm = (req, res) => { };
+const getEditTaskForm = (req, res) => {
+    let id = parseInt(req.params.id);
+    let task = tasks.find((task) => task.id === id);
 
-const editTask = (req, res) => { };
+    if (!task) {
+        res.redirect("/");
+    } else {
+        res.render("edit", { title: "Editar Tarea", task });
+    };
+};
+
+const editTask = (req, res) => { 
+    let id = parseInt(req.params.id);
+    let taskIndex = tasks.findIndex((task) => task.id === id);
+
+    if (taskIndex === -1) {
+        res.redirect("/");  
+    } else {
+        tasks[taskIndex].title = req.body.title;
+        res.redirect("/");
+    }
+};
 
 const completeTask = (req, res) => { };
 
